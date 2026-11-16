@@ -372,20 +372,7 @@ st.markdown("""
     background: var(--gradient-main);
     color: #fff;
 }
-.score-bar-container {
-    flex: 1;
-    margin-left: 0.6rem;
-    height: 4px;
-    background: rgba(255,255,255,0.06);
-    border-radius: 2px;
-    overflow: hidden;
-}
-.score-bar-fill {
-    height: 100%;
-    border-radius: 2px;
-    background: var(--gradient-main);
-    transition: width 0.5s ease;
-}
+
 
 /* ═══════════════════════════════════════════════════════
    DETAIL PAGE
@@ -824,36 +811,11 @@ def render_card(row, score_col=None):
     initials = _initials(title)
 
     score_html = ""
-    bar_html = ""
     if score_col and score_col in row and row[score_col] > 0:
         pct = row[score_col] * 100
-        bar_width = min(pct * 3, 100)  # Scale for visual
         score_html = f'<span class="score-badge">🎯 {pct:.1f}%</span>'
-        bar_html = f'''
-        <div class="score-bar-container">
-            <div class="score-bar-fill" style="width:{bar_width}%"></div>
-        </div>'''
 
-    st.markdown(f"""
-    <div class="movie-card">
-        <div class="card-poster" style="background:{grad};">
-            <span class="poster-initials">{initials}</span>
-        </div>
-        <div class="card-body">
-            <div class="card-title">{title}</div>
-            <div class="card-meta">
-                <span class="meta-pill pill-genre">🎭 {genre_str}</span>
-                <span class="meta-pill pill-year">📅 {year}</span>
-                <span class="meta-pill pill-rating">⭐ {rating:.1f}</span>
-            </div>
-            <div class="card-overview">{overview}</div>
-            <div class="card-footer">
-                {score_html}
-                {bar_html}
-            </div>
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
+    st.markdown(f"""<div class="movie-card"><div class="card-poster" style="background:{grad};"><span class="poster-initials">{initials}</span></div><div class="card-body"><div class="card-title">{title}</div><div class="card-meta"><span class="meta-pill pill-genre">🎭 {genre_str}</span><span class="meta-pill pill-year">📅 {year}</span><span class="meta-pill pill-rating">⭐ {rating:.1f}</span></div><div class="card-overview">{overview}</div><div class="card-footer">{score_html}</div></div></div>""", unsafe_allow_html=True)
 
     if st.button("🔍 View Details", key=f"detail_{title}_{score_col}_{id(row)}",
                  use_container_width=True):
