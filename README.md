@@ -158,7 +158,7 @@ Place `tmdb_5000_movies.csv` and `tmdb_5000_credits.csv` inside the `data/` fold
 streamlit run app.py
 ```
 
-The app opens at **http://localhost:8501**.
+The app opens at **https://cinefind.streamlit.app/**.
 
 ---
 
